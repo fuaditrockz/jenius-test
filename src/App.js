@@ -14,26 +14,23 @@ import {
 } from "@chakra-ui/react";
 import "./App.css";
 
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setContacts } from "./store/reducers";
 
 function App() {
-  const test = useSelector((state) => state.contacts.value);
-
-  const [contacts, setContacts] = useState([]);
-
-  console.log("Test Contacts", test);
+  const contacts = useSelector((state) => state.app.value.contacts);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("https://contact.herokuapp.com/contact")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Test Data", data);
-        setContacts(data.data);
-      });
-  }, []);
-
-  console.log("Test Contact Get Data", contacts);
+    if (contacts.length === 0) {
+      fetch("https://contact.herokuapp.com/contact")
+        .then((response) => response.json())
+        .then((data) => {
+          dispatch(setContacts(data.data));
+        });
+    }
+  }, [contacts]);
 
   return (
     <div className="App">
@@ -62,33 +59,34 @@ function App() {
 
           <CardBody>
             <Stack divider={<StackDivider />} spacing="4">
-              {contacts.map((contact) => {
-                return (
-                  <Flex
-                    key={contact.id}
-                    style={{
-                      cursor: "pointer",
-                      padding: "10px",
-                      borderRadius: "5px",
-                    }}
-                    _hover={{
-                      backgroundColor: "gray.100",
-                      transition: "all 0.5s ease-in-out",
-                    }}
-                  >
-                    <Avatar src={contact.photo} />
-                    <Box ml="3">
-                      <Text fontWeight="bold">
-                        {contact.firstName} {contact.lastName}
-                        <Badge ml="1" colorScheme="green">
-                          {contact.age}
-                        </Badge>
-                      </Text>
-                      <Text fontSize="sm">{contact.id}</Text>
-                    </Box>
-                  </Flex>
-                );
-              })}
+              {contacts.length > 0 &&
+                contacts.map((contact) => {
+                  return (
+                    <Flex
+                      key={contact.id}
+                      style={{
+                        cursor: "pointer",
+                        padding: "10px",
+                        borderRadius: "5px",
+                      }}
+                      _hover={{
+                        backgroundColor: "gray.100",
+                        transition: "all 0.5s ease-in-out",
+                      }}
+                    >
+                      <Avatar src={contact.photo} />
+                      <Box ml="3">
+                        <Text fontWeight="bold">
+                          {contact.firstName} {contact.lastName}
+                          <Badge ml="1" colorScheme="green">
+                            {contact.age}
+                          </Badge>
+                        </Text>
+                        <Text fontSize="sm">{contact.id}</Text>
+                      </Box>
+                    </Flex>
+                  );
+                })}
             </Stack>
           </CardBody>
         </Card>

@@ -6,15 +6,18 @@ const initialState = {
   },
 };
 
-export const contactsSlice = createSlice({
-  name: "contacts",
+export const appSlice = createSlice({
+  name: "app",
   initialState,
   reducers: {
-    contacts: (state, action) => {
-      state.value = action.payload;
+    contacts: (state) => {
+      return state;
+    },
+    setContacts: (state, action) => {
+      state.value.contacts = action.payload;
       return state;
     },
   },
 });
 
-export const { contacts } = contactsSlice.actions;
+export const { setContacts, contacts } = appSlice.actions;
