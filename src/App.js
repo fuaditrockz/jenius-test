@@ -8,6 +8,9 @@ import {
   StackDivider,
   Box,
   Text,
+  Flex,
+  Avatar,
+  Badge,
 } from "@chakra-ui/react";
 import "./App.css";
 
@@ -43,30 +46,22 @@ function App() {
 
           <CardBody>
             <Stack divider={<StackDivider />} spacing="4">
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Summary
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  View a summary of all your clients over the last month.
-                </Text>
-              </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Overview
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  Check out the overview of your clients.
-                </Text>
-              </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Analysis
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  See a detailed analysis of all your business clients.
-                </Text>
-              </Box>
+              {contacts.map((contact) => {
+                return (
+                  <Flex key={contact.id}>
+                    <Avatar src={contact.photo} />
+                    <Box ml="3">
+                      <Text fontWeight="bold">
+                        {contact.firstName} {contact.lastName}
+                        <Badge ml="1" colorScheme="green">
+                          {contact.age}
+                        </Badge>
+                      </Text>
+                      <Text fontSize="sm">{contact.id}</Text>
+                    </Box>
+                  </Flex>
+                );
+              })}
             </Stack>
           </CardBody>
         </Card>
