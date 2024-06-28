@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create component snapshot 1`] = `
+<div
+  className="chakra-container css-0"
+  style={
+    Object {
+      "marginBottom": 50,
+      "marginTop": 20,
+    }
+  }
+>
+  <span
+    aria-label="Loading Spinner"
+    data-testid="loader"
+    style={
+      Object {
+        "borderColor": "red",
+        "display": "block",
+        "height": "150px",
+        "margin": "0 auto",
+        "position": "relative",
+        "transform": "rotate(165deg)",
+        "width": "150px",
+      }
+    }
+  >
+    <span
+      style={
+        Object {
+          "animation": "react-spinners-HashLoader-before 2s infinite",
+          "animationFillMode": "none",
+          "borderRadius": "15px",
+          "display": "block",
+          "height": "30px",
+          "left": "50%",
+          "position": "absolute",
+          "top": "50%",
+          "transform": "translate(-50%, -50%)",
+          "width": "30px",
+        }
+      }
+    />
+    <span
+      style={
+        Object {
+          "animation": "react-spinners-HashLoader-after 2s infinite",
+          "animationFillMode": "none",
+          "borderRadius": "15px",
+          "display": "block",
+          "height": "30px",
+          "left": "50%",
+          "position": "absolute",
+          "top": "50%",
+          "transform": "translate(-50%, -50%)",
+          "width": "30px",
+        }
+      }
+    />
+  </span>
+</div>
+`;

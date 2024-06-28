@@ -1,8 +1,13 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "./App";
+import { StoreProvider } from "./store/StoreProvider";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
+test("renders retrieve Contacts by Jenius Test", () => {
+  render(
+    <StoreProvider>
+      <App />
+    </StoreProvider>
+  );
+  const linkElement = screen.getByText(/Retrieve Contacts by Jenius Test/i);
   expect(linkElement).toBeInTheDocument();
 });
