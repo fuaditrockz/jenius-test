@@ -37,18 +37,45 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header"></header>
-      <Container>
+      <header
+        className="App-header"
+        style={{
+          padding: "20px",
+          background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+          position: "fixed",
+          top: 0,
+          width: "100%",
+          zIndex: 100,
+        }}
+      >
+        <Container>
+          <Heading as="h4" size="xl" noOfLines={1}>
+            Retrieve Contacts by Jenius Test
+          </Heading>
+        </Container>
+      </header>
+      <Container style={{ paddingTop: 100 }}>
         <Card>
           <CardHeader>
-            <Heading size="md">Contacts</Heading>
+            <Heading size="md">{contacts.length} Contacts</Heading>
           </CardHeader>
 
           <CardBody>
             <Stack divider={<StackDivider />} spacing="4">
               {contacts.map((contact) => {
                 return (
-                  <Flex key={contact.id}>
+                  <Flex
+                    key={contact.id}
+                    style={{
+                      cursor: "pointer",
+                      padding: "10px",
+                      borderRadius: "5px",
+                    }}
+                    _hover={{
+                      backgroundColor: "gray.100",
+                      transition: "all 0.5s ease-in-out",
+                    }}
+                  >
                     <Avatar src={contact.photo} />
                     <Box ml="3">
                       <Text fontWeight="bold">
