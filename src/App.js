@@ -6,17 +6,13 @@ import {
   Heading,
   Stack,
   StackDivider,
-  Box,
-  Text,
-  Flex,
-  Avatar,
-  Badge,
 } from "@chakra-ui/react";
 import "./App.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setContacts } from "./store/reducers";
+import Contact from "./components/Contact";
 
 function App() {
   const contacts = useSelector((state) => state.app.value.contacts);
@@ -60,33 +56,9 @@ function App() {
           <CardBody>
             <Stack divider={<StackDivider />} spacing="4">
               {contacts.length > 0 &&
-                contacts.map((contact) => {
-                  return (
-                    <Flex
-                      key={contact.id}
-                      style={{
-                        cursor: "pointer",
-                        padding: "10px",
-                        borderRadius: "5px",
-                      }}
-                      _hover={{
-                        backgroundColor: "gray.100",
-                        transition: "all 0.5s ease-in-out",
-                      }}
-                    >
-                      <Avatar src={contact.photo} />
-                      <Box ml="3">
-                        <Text fontWeight="bold">
-                          {contact.firstName} {contact.lastName}
-                          <Badge ml="1" colorScheme="green">
-                            {contact.age}
-                          </Badge>
-                        </Text>
-                        <Text fontSize="sm">{contact.id}</Text>
-                      </Box>
-                    </Flex>
-                  );
-                })}
+                contacts.map((contact) => (
+                  <Contact key={contact.id} contactData={contact} />
+                ))}
             </Stack>
           </CardBody>
         </Card>
