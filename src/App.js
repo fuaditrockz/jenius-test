@@ -12,7 +12,9 @@ import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setContacts } from "./store/reducers";
+
 import Contact from "./components/Contact";
+import Loading from "./components/Loading";
 
 function App() {
   const contacts = useSelector((state) => state.app.value.contacts);
@@ -26,7 +28,7 @@ function App() {
           dispatch(setContacts(data.data));
         });
     }
-  }, [contacts]);
+  }, [contacts, dispatch]);
 
   return (
     <div className="App">
@@ -50,15 +52,22 @@ function App() {
       <Container style={{ paddingTop: 100 }}>
         <Card>
           <CardHeader>
-            <Heading size="md">{contacts.length} Contacts</Heading>
+            <Heading size="md">
+              {contacts.length > 0
+                ? contacts.length + " Contacts"
+                : "Loading Contacts..."}
+            </Heading>
           </CardHeader>
 
           <CardBody>
             <Stack divider={<StackDivider />} spacing="4">
-              {contacts.length > 0 &&
+              {contacts.length > 0 ? (
                 contacts.map((contact) => (
                   <Contact key={contact.id} contactData={contact} />
-                ))}
+                ))
+              ) : (
+                <Loading />
+              )}
             </Stack>
           </CardBody>
         </Card>
